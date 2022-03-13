@@ -54,6 +54,7 @@ pub use sp_runtime::BuildStorage;
 pub use sp_runtime::{Perbill, Permill};
 
 // import local pallets
+pub use pallet_lotte;
 pub use pallet_player;
 pub use pallet_pool;
 pub use pallet_tx_handler;
@@ -135,10 +136,7 @@ pub const DAYS: BlockNumber = HOURS * 24;
 /// The version information used to identify this runtime when compiled natively.
 #[cfg(feature = "std")]
 pub fn native_version() -> NativeVersion {
-	NativeVersion {
-		runtime_version: VERSION,
-		can_author_with: Default::default(),
-	}
+	NativeVersion { runtime_version: VERSION, can_author_with: Default::default() }
 }
 
 const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
@@ -370,11 +368,13 @@ impl pallet_base_fee::Config for Runtime {
 
 impl pallet_randomness_collective_flip::Config for Runtime {}
 
-
 impl pallet_player::Config for Runtime {
 	type Event = Event;
 	type Currency = Balances;
 	type GameRandomness = RandomnessCollectiveFlip;
+}
+impl pallet_lotte::Config for Runtime {
+	type Event = Event;
 }
 
 parameter_types! {
@@ -389,16 +389,13 @@ impl pallet_pool::Config for Runtime {
 	type MaxIngamePlayer = MaxIngamePlayer;
 }
 
-parameter_types! {
-
-}
+parameter_types! {}
 
 impl pallet_tx_handler::Config for Runtime {
 	type Event = Event;
 	type Currency = Balances;
 	type AuroraZone = Pool;
 }
-
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
@@ -420,6 +417,7 @@ construct_runtime!(
 		DynamicFee: pallet_dynamic_fee::{Pallet, Call, Storage, Config, Inherent},
 		BaseFee: pallet_base_fee::{Pallet, Call, Storage, Config<T>, Event},
 
+		Lotte: pallet_lotte,
 		Player: pallet_player,
 		Pool: pallet_pool,
 		TxHandler: pallet_tx_handler,
@@ -523,9 +521,9 @@ impl fp_self_contained::SelfContainedCall for Call {
 		info: Self::SignedInfo,
 	) -> Option<sp_runtime::DispatchResultWithInfo<PostDispatchInfoOf<Self>>> {
 		match self {
-			call @ Call::Ethereum(pallet_ethereum::Call::transact { .. }) => Some(call.dispatch(
-				Origin::from(pallet_ethereum::RawOrigin::EthereumTransaction(info)),
-			)),
+			call @ Call::Ethereum(pallet_ethereum::Call::transact { .. }) => Some(
+				call.dispatch(Origin::from(pallet_ethereum::RawOrigin::EthereumTransaction(info))),
+			),
 			_ => None,
 		}
 	}

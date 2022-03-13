@@ -1,6 +1,6 @@
 use aurora_testnet_runtime::{
-	AccountId, AuraConfig, BalancesConfig, EVMConfig, EthereumConfig, GenesisConfig, GrandpaConfig,
-	Signature, SudoConfig, SystemConfig, WASM_BINARY, PoolConfig, Balance,
+	AccountId, AuraConfig, Balance, BalancesConfig, EVMConfig, EthereumConfig, GenesisConfig,
+	GrandpaConfig, PoolConfig, Signature, SudoConfig, SystemConfig, WASM_BINARY,
 };
 use sc_service::ChainType;
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
@@ -200,6 +200,19 @@ fn testnet_genesis(
 						storage: std::collections::BTreeMap::new(),
 					},
 				);
+				map.insert(
+					H160::from_slice(&hex_literal::hex!(
+						"6ec1A58f644CEF420cEe3168c93aaF9f6666Ae5d"
+					)),
+					pallet_evm::GenesisAccount {
+						nonce: U256::zero(),
+						// Using a larger number, so I can tell the accounts apart by balance.
+						balance: U256::from(1u64 << 61),
+						code: vec![],
+						storage: std::collections::BTreeMap::new(),
+					},
+				);
+
 				map
 			},
 		},
