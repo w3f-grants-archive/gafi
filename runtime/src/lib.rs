@@ -54,7 +54,7 @@ pub use sp_runtime::BuildStorage;
 pub use sp_runtime::{Perbill, Permill};
 
 // import local pallets
-pub use pallet_lotte;
+pub use pallet_lotteria;
 pub use pallet_player;
 pub use pallet_pool;
 pub use pallet_tx_handler;
@@ -373,8 +373,9 @@ impl pallet_player::Config for Runtime {
 	type Currency = Balances;
 	type GameRandomness = RandomnessCollectiveFlip;
 }
-impl pallet_lotte::Config for Runtime {
+impl pallet_lotteria::Config for Runtime {
 	type Event = Event;
+	type Currency = Balances;
 }
 
 parameter_types! {
@@ -417,7 +418,7 @@ construct_runtime!(
 		DynamicFee: pallet_dynamic_fee::{Pallet, Call, Storage, Config, Inherent},
 		BaseFee: pallet_base_fee::{Pallet, Call, Storage, Config<T>, Event},
 
-		Lotte: pallet_lotte,
+		Lotteria: pallet_lotteria,
 		Player: pallet_player,
 		Pool: pallet_pool,
 		TxHandler: pallet_tx_handler,
