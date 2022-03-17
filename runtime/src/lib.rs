@@ -376,6 +376,7 @@ impl pallet_player::Config for Runtime {
 impl pallet_lotteria::Config for Runtime {
 	type Event = Event;
 	type Currency = Balances;
+	type GameRandomness = RandomnessCollectiveFlip;
 }
 
 parameter_types! {
