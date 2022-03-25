@@ -165,59 +165,6 @@ fn testnet_genesis(
 		evm: EVMConfig {
 			accounts: {
 				let mut map = BTreeMap::new();
-				// H160 address of Alice dev account
-				// Derived from SS58 (42 prefix) address
-				// SS58: 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
-				// hex: 0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d
-				// Using the full hex key, truncating to the first 20 bytes (the first 40 hex chars)
-				map.insert(
-					H160::from_slice(&hex_literal::hex!(
-						"d43593c715fdd31c61141abd04a99fd6822c8558"
-					)),
-					pallet_evm::GenesisAccount {
-						nonce: U256::zero(),
-						// Using a larger number, so I can tell the accounts apart by balance.
-						balance: U256::from(1u64 << 61),
-						code: vec![],
-						storage: std::collections::BTreeMap::new(),
-					},
-				);
-				map.insert(
-					H160::from_slice(&hex_literal::hex!(
-						"dDda6430955c710cDD5BcBb65c7f32313e8b07c0"
-					)),
-					pallet_evm::GenesisAccount {
-						nonce: U256::zero(),
-						// Using a larger number, so I can tell the accounts apart by balance.
-						balance: U256::from(1u64 << 61),
-						code: vec![],
-						storage: std::collections::BTreeMap::new(),
-					},
-				);
-				map.insert(
-					H160::from_slice(&hex_literal::hex!(
-						"f6de688415B8038814D116861d46A937Be60Df90"
-					)),
-					pallet_evm::GenesisAccount {
-						nonce: U256::zero(),
-						// Using a larger number, so I can tell the accounts apart by balance.
-						balance: U256::from(1u64 << 61),
-						code: vec![],
-						storage: std::collections::BTreeMap::new(),
-					},
-				);
-				map.insert(
-					H160::from_slice(&hex_literal::hex!(
-						"b28049C6EE4F90AE804C70F860e55459E837E84b"
-					)),
-					pallet_evm::GenesisAccount {
-						nonce: U256::zero(),
-						// Using a larger number, so I can tell the accounts apart by balance.
-						balance: U256::from(1u64 << 61),
-						code: vec![],
-						storage: std::collections::BTreeMap::new(),
-					},
-				);
 				map
 			},
 		},

@@ -406,7 +406,6 @@ impl pallet_tx_handler::Config for Runtime {
 	type OnChargeEVMTxHandler = ();
 	// type AddressMapping = HashedAddressMapping<BlakeTwo256>;
 	type AddressMapping = ProofAddressMapping<Self>;
-	type DefaultAddressMapping = HashedAddressMapping<BlakeTwo256>;
 	type MessagePrefix  = Prefix;
 }
 

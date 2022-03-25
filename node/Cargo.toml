@@ -25,18 +25,18 @@ jsonrpc-core = "18.0.0"
 async-trait = "0.1"
 
 # Frontier
-fp-consensus = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fp-rpc = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fp-storage = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fc-consensus = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fc-db = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fc-mapping-sync = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fc-rpc = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-base-fee = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-dynamic-fee = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-ethereum = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-evm = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fc-rpc-core = {git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
+fp-consensus = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fp-rpc = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fp-storage = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fc-consensus = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fc-db = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fc-mapping-sync = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fc-rpc = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-base-fee = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-dynamic-fee = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-ethereum = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-evm = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fc-rpc-core = {git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
 
 # Substrate
 sc-cli = {version = "0.10.0-dev", git = "https://github.com/cryptoviet/substrate", branch = "aur-dot", features = ["wasmtime"]}

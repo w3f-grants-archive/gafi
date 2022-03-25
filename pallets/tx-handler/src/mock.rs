@@ -177,7 +177,6 @@ impl pallet_tx_handler::Config for Test {
 	type PackServiceProvider = PalletPool;
 	type OnChargeEVMTxHandler = ();
 	type AddressMapping = ProofAddressMapping<Self>;
-	type DefaultAddressMapping = HashedAddressMapping<BlakeTwo256>;
 	type MessagePrefix = Prefix;
 }
 

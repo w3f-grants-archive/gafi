@@ -54,7 +54,6 @@ pub mod pallet {
 		type PackServiceProvider: PackServiceProvider<BalanceOf<Self>>;
 		type OnChargeEVMTxHandler: OnChargeEVMTransaction<Self>;
 		type AddressMapping: AddressMapping<Self::AccountId>;
-		type DefaultAddressMapping: AddressMapping<Self::AccountId>;
 		#[pallet::constant]
 		type MessagePrefix: Get<&'static [u8]>;
 	}
@@ -118,14 +117,16 @@ where
 	}
 
 	pub fn transfer_all(from: H160, to: T::AccountId) {
-		let from_account: T::AccountId = T::DefaultAddressMapping::into_account_id(from);
-		let total_free: BalanceOf<T> = <T as pallet::Config>::Currency::free_balance(&from_account);
-		let _ = <T as pallet::Config>::Currency::transfer(
-			&from_account,
-			&to,
-			total_free,
-			ExistenceRequirement::AllowDeath,
-		);
+		if let Some(from_account) = <T as pallet::Config>::AddressMapping::into_account_id(from) {
+			let total_free: BalanceOf<T> =
+				<T as pallet::Config>::Currency::free_balance(&from_account);
+			let _ = <T as pallet::Config>::Currency::transfer(
+				&from_account,
+				&to,
+				total_free,
+				ExistenceRequirement::AllowDeath,
+			);
+		}
 	}
 }
 
@@ -148,14 +149,17 @@ where
 	type LiquidityInfo =
 		<<T as pallet::Config>::OnChargeEVMTxHandler as OnChargeEVMTransaction<T>>::LiquidityInfo;
 	fn withdraw_fee(who: &H160, fee: U256) -> Result<Self::LiquidityInfo, pallet_evm::Error<T>> {
-		let account_id = <T as pallet::Config>::AddressMapping::into_account_id(*who);
-		let mut service_fee = fee;
-		if let Some(player) = T::AuroraZone::is_in_aurora_zone(&account_id) {
-			if let Some(service) = T::PackServiceProvider::get_service(player.service) {
-				service_fee = fee / service.discount;
+		if let Some(account_id) = <T as pallet::Config>::AddressMapping::into_account_id(*who) {
+			let mut service_fee = fee;
+			if let Some(player) = T::AuroraZone::is_in_aurora_zone(&account_id) {
+				if let Some(service) = T::PackServiceProvider::get_service(player.service) {
+					service_fee = fee / service.discount;
+				}
 			}
+			T::OnChargeEVMTxHandler::withdraw_fee(who, service_fee)
+		} else {
+			Err(pallet_evm::Error::<T>::AddressNotMap)
 		}
-		T::OnChargeEVMTxHandler::withdraw_fee(who, service_fee)
 	}
 
 	fn correct_and_deposit_fee(
@@ -177,11 +181,7 @@ where
 	T: Config,
 	AccountId32: From<<T as frame_system::Config>::AccountId>,
 {
-	fn into_account_id(address: H160) -> AccountId32 {
-		if let Some(account_id) = Mapping::<T>::get(address) {
-			account_id
-		} else {
-			T::DefaultAddressMapping::into_account_id(address).into()
-		}
+	fn into_account_id(address: H160) -> Option<AccountId32> {
+		Mapping::<T>::get(address)
 	}
 }

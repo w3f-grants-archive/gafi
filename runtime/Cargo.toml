@@ -17,15 +17,15 @@ codec = {package = "parity-scale-codec", version = "2.0.0", default-features = f
 scale-info = {version = "1.0", default-features = false, features = ["derive"]}
 
 # Frontier
-fp-rpc = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-fp-self-contained = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-base-fee = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-dynamic-fee = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-ethereum = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-evm = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-evm-precompile-modexp = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-evm-precompile-sha3fips = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
-pallet-evm-precompile-simple = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "aur-dot"}
+fp-rpc = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+fp-self-contained = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-base-fee = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-dynamic-fee = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-ethereum = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-evm = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-evm-precompile-modexp = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-evm-precompile-sha3fips = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
+pallet-evm-precompile-simple = {default-features = false, git = "https://github.com/cryptoviet/frontier", branch = "v1.0.0-dev"}
 
 # Substrate
 frame-executive = {version = "4.0.0-dev", default-features = false, git = "https://github.com/cryptoviet/substrate", branch = "aur-dot"}
